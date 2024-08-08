@@ -53,8 +53,8 @@ def check_output(*args, **kwargs):
         startupinfo.wShowWindow = subprocess.SW_HIDE
         encoding = 'gbk'
 
-    return str.encode(subprocess.check_output(*args, universal_newlines=True, startupinfo=startupinfo, **kwargs), 'gbk').decode('gbk')
-str.encode('法国', 'gbk').decode('gbk')
+    return str.encode(subprocess.check_output(*args, universal_newlines=True, startupinfo=startupinfo, **kwargs), encoding).decode(encoding)
+
 
 
 def rsync_ssh_settings(view=sublime.active_window().active_view()):
