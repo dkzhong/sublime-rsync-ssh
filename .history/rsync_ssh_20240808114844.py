@@ -317,7 +317,7 @@ def build_ssh_destination_string(destination):
     parts = [
         user + "@" if user else None,
         host,
-        # ":" + str(port) if port else None,
+        ":" + str(port) if port else None,
     ]
     return "".join(filter(None, parts))
 
