@@ -1073,6 +1073,132 @@
     {
         "label": "RsyncSshInitSettingsCommand",
         "kind": 6,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "class RsyncSshInitSettingsCommand(sublime_plugin.TextCommand):\n    \"\"\"Sublime Command for creating the rsync_ssh block in the project settings file\"\"\"\n    def run(self, edit, **args):  # pylint: disable=W0613\n        \"\"\"Generate settings for rsync-ssh\"\"\"\n        # Load project configuration\n        project_data = self.view.window().project_data()\n        if project_data == None:\n            console_print(\n                \"\",\n                \"\",",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "RsyncSshSyncSpecificRemoteCommand",
+        "kind": 6,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "class RsyncSshSyncSpecificRemoteCommand(sublime_plugin.TextCommand):\n    \"\"\"Start rsync for a specific remote\"\"\"\n    remotes = []\n    hosts = []\n    def run(self, edit, **args):  # pylint: disable=W0613\n        \"\"\"Let user select which remote/destination to sync using the quick panel\"\"\"\n        settings = rsync_ssh_settings(self.view)\n        if not settings:\n            console_print(\"\", \"\", \"Aborting! - rsync ssh is not configured!\")\n            return",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "RsyncSshSaveCommand",
+        "kind": 6,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "class RsyncSshSaveCommand(sublime_plugin.EventListener):\n    \"\"\"Sublime Command for syncing a single file when user saves\"\"\"\n    def on_post_save(self, view):\n        \"\"\"Invoked each time the user saves a file.\"\"\"\n        # Get settings\n        settings = rsync_ssh_settings(view)\n        # Don't do anything if rsync-ssh hasn't been configured\n        if not settings:\n            return\n        # Don't sync single file if user has disabled sync on save",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "RsyncSshSyncCommand",
+        "kind": 6,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "class RsyncSshSyncCommand(sublime_plugin.TextCommand):\n    \"\"\"Sublime Command for invoking the actual sync process\"\"\"\n    def run(self, edit, **args):  # pylint: disable=W0613\n        \"\"\"Start thread with rsync to keep ui responsive\"\"\"\n        # Get settings\n        settings = rsync_ssh_settings(self.view)\n        if not settings:\n            console_print(\"\", \"\", \"Aborting! - rsync ssh is not configured!\")\n            return\n        # Start command thread to keep ui responsive",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "RsyncSSH",
+        "kind": 6,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "class RsyncSSH(threading.Thread):\n    \"\"\"Rsync path to remote\"\"\"\n    def __init__(\n        self,\n        view,\n        settings,\n        path_being_saved=\"\",\n        restrict_to_destinations=None,\n        force_sync=False,\n    ):",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "Rsync",
+        "kind": 6,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "class Rsync(threading.Thread):\n    \"\"\"rsync executor\"\"\"\n    def __init__(\n        self,\n        view,\n        ssh_binary,\n        local_path,\n        prefix,\n        destination,\n        excludes,",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "console_print",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def console_print(host, prefix, output):\n    \"\"\"Print message to console\"\"\"\n    if host and prefix:\n        host = host + \"[\" + prefix + \"]: \"\n    elif host and not prefix:\n        host = host + \": \"\n    elif not host and prefix:\n        host = os.path.basename(prefix) + \": \"\n    output = \"[rsync-ssh] \" + host + output.replace(\"\\n\", \"\\n[rsync-ssh] \" + host)\n    print(output)",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "console_show",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def console_show(window=sublime.active_window()):\n    \"\"\"Show console panel\"\"\"\n    window.run_command(\"show_panel\", {\"panel\": \"console\", \"toggle\": False})\ndef normalize_path(path):\n    \"\"\"Normalizes path to Unix format, converting back- to forward-slashes.\"\"\"\n    return path.strip().replace(\"\\\\\", \"/\")\ndef current_user():\n    \"\"\"Get current username from the environment\"\"\"\n    if \"USER\" in os.environ:\n        return os.environ[\"USER\"]",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_path",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def normalize_path(path):\n    \"\"\"Normalizes path to Unix format, converting back- to forward-slashes.\"\"\"\n    return path.strip().replace(\"\\\\\", \"/\")\ndef current_user():\n    \"\"\"Get current username from the environment\"\"\"\n    if \"USER\" in os.environ:\n        return os.environ[\"USER\"]\n    elif \"USERNAME\" in os.environ:\n        return os.environ[\"USERNAME\"]\n    else:",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def current_user():\n    \"\"\"Get current username from the environment\"\"\"\n    if \"USER\" in os.environ:\n        return os.environ[\"USER\"]\n    elif \"USERNAME\" in os.environ:\n        return os.environ[\"USERNAME\"]\n    else:\n        return \"username\"\ndef check_output(*args, **kwargs):\n    \"\"\"Runs specified system command using subprocess.check_output()\"\"\"",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "check_output",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def check_output(*args, **kwargs):\n    \"\"\"Runs specified system command using subprocess.check_output()\"\"\"\n    startupinfo = None\n    encoding = 'utf-8'\n    if sublime.platform() == \"windows\":\n        # Don't let console window pop-up on Windows.\n        startupinfo = subprocess.STARTUPINFO()\n        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW\n        startupinfo.wShowWindow = subprocess.SW_HIDE\n        encoding = 'gbk'",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "rsync_ssh_settings",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def rsync_ssh_settings(view=sublime.active_window().active_view()):\n    \"\"\"Get settings from the sublime project file\"\"\"\n    project_data = view.window().project_data()\n    # Not all windows have project data\n    if project_data == None:\n        return None\n    settings = view.window().project_data().get(\"settings\", {}).get(\"rsync_ssh\")\n    return settings\nclass RsyncSshInitSettingsCommand(sublime_plugin.TextCommand):\n    \"\"\"Sublime Command for creating the rsync_ssh block in the project settings file\"\"\"",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "build_ssh_destination_string",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def build_ssh_destination_string(destination):\n    \"\"\"Build SSH destination string: (user@)host(:port)\"\"\"\n    user = destination.get(\"remote_user\")\n    host = destination.get(\"remote_host\")\n    port = destination.get(\"remote_port\")\n    parts = [\n        user + \"@\" if user else None,\n        host,\n        # \":\" + str(port) if port else None,\n    ]",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "build_rsync_destination_string",
+        "kind": 2,
+        "importPath": ".history.rsync_ssh_20240808192317",
+        "description": ".history.rsync_ssh_20240808192317",
+        "peekOfCode": "def build_rsync_destination_string(destination, path=None):\n    if path is None:\n        path = destination.get(\"remote_path\")\n    return build_ssh_destination_string(destination) + \":\" + shlex.quote(path)\nclass RsyncSSH(threading.Thread):\n    \"\"\"Rsync path to remote\"\"\"\n    def __init__(\n        self,\n        view,\n        settings,",
+        "detail": ".history.rsync_ssh_20240808192317",
+        "documentation": {}
+    },
+    {
+        "label": "RsyncSshInitSettingsCommand",
+        "kind": 6,
         "importPath": "rsync_ssh",
         "description": "rsync_ssh",
         "peekOfCode": "class RsyncSshInitSettingsCommand(sublime_plugin.TextCommand):\n    \"\"\"Sublime Command for creating the rsync_ssh block in the project settings file\"\"\"\n    def run(self, edit, **args):  # pylint: disable=W0613\n        \"\"\"Generate settings for rsync-ssh\"\"\"\n        # Load project configuration\n        project_data = self.view.window().project_data()\n        if project_data == None:\n            console_print(\n                \"\",\n                \"\",",
