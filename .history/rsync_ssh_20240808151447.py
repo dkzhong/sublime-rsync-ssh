@@ -741,8 +741,8 @@ class Rsync(threading.Thread):
 
         # Execute rsync
         try:
-            # stderr = subprocess.STDOUT
-            output = check_output(rsync_command, encoding='gbk', stderr=subprocess.STDOUT)
+            stderr = subprocess.STDOUT.decode("gbk").encode("utf-8")
+            output = check_output(rsync_command, stderr=stderr)
             # Fix rsync output to include relative remote path
             if self.specific_path and os.path.isfile(self.specific_path):
                 destination_file_relative = re.sub(
